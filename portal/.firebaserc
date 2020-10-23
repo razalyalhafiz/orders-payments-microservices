@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "orders-payments-microservices": {
+      "hosting": {
+        "opm-portal": [
+          "orders-payments-microservices"
+        ]
+      }
+    }
+  }
+}

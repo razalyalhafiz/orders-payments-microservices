@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.dbName }}
+  labels:
+    name: mongo
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+  clusterIP: None
+  selector:
+    role: mongo
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.dbName }}
+spec:
+  serviceName: {{ .Values.dbName }}
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Values.dbName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.dbName }}
+        role: mongo
+        environment: test
+        replicaset: MainRepSet
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: replicaset
+                  operator: In
+                  values:
+                  - MainRepSet
+              topologyKey: kubernetes.io/hostname
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mongodb-container
+          image: mongo
+          command:
+            - mongod
+            - "--bind_ip_all"
+            - "--replSet"
+            - "MainRepSet"
+          resources:
+            requests:
+              cpu: 0.2
+              memory: 200Mi
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-persistent-storage-claim
+              mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb-persistent-storage-claim
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "standard"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

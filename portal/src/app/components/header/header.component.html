@@ -1,0 +1,19 @@
+<mat-toolbar class="app-toolbar" color="primary">
+  <mat-toolbar-row>
+    <button mat-button routerLink="/">Orders Operations Portal</button>
+    <span class="spacer"></span>
+    <ng-container *ngIf="user$ | async as user; else loginIcon">
+      <app-profile-card [user]="user" (logoutClick)="logout()">
+      </app-profile-card>
+    </ng-container>
+    <ng-template #loginIcon>
+      <button type="button" (click)="login()" class="login-button">
+        <img
+          src="https://www.iconfinder.com/data/icons/social-media-2210/24/Google-512.png"
+          class="google-icon"
+          alt=""
+        /><b class="login-text"> Sign in with Google</b>
+      </button>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>

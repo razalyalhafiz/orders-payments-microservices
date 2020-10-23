@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+}
+
+.actions-header,
+.actions-cell {
+  text-align: center;
+  min-width: 110px;
+}
+
+.cancel-button {
+  margin-left: 10px;
+}
+
+.delivered {
+  color: lightgreen;
+}
+
+.confirmed {
+  color: yellow;
+}
+
+.cancelled {
+  color: grey;
+}

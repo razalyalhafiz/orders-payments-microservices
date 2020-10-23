@@ -1,0 +1,69 @@
+<form
+  *ngIf="createOrder; else elseBlock"
+  [formGroup]="orderForm"
+  (ngSubmit)="onSubmit()"
+>
+  <h3 mat-dialog-title>New order</h3>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Name" formControlName="name" />
+    </mat-form-field>
+    <mat-error
+      *ngIf="
+        orderForm.get('name').hasError('required') &&
+        (orderForm.get('name').dirty || orderForm.get('name').touched)
+      "
+    >
+      Name is <strong>required</strong>.
+    </mat-error>
+    <br />
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="Email"
+        formControlName="email"
+      />
+    </mat-form-field>
+    <mat-error
+      *ngIf="
+        orderForm.get('email').hasError('email') &&
+        !orderForm.get('email').hasError('required')
+      "
+    >
+      Please enter a valid email address.
+    </mat-error>
+    <mat-error
+      *ngIf="
+        orderForm.get('email').hasError('required') &&
+        (orderForm.get('email').dirty || orderForm.get('email').touched)
+      "
+    >
+      Email is <strong>required</strong>.
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      type="submit"
+      [disabled]="orderForm.pristine || orderForm.invalid"
+      mat-raised-button
+      color="primary"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>
+<ng-template #elseBlock>
+  <h3 mat-dialog-title>View order</h3>
+  <label>Order Id</label>
+  <p>{{ data.id }}</p>
+  <label>Name</label>
+  <p>{{ data.name }}</p>
+  <label>Email</label>
+  <p>{{ data.email }}</p>
+  <label>State</label>
+  <p [ngClass]="data.state">{{ data.state }}</p>
+  <br />
+  <label>Created on</label>
+  <p>{{ data.created | date: "medium" }}</p>
+</ng-template>

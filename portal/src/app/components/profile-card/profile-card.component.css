@@ -1,0 +1,37 @@
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.big-avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
+.profile-card {
+  text-align: center;
+  min-width: 240px;
+  padding: 15px 20px 0px;
+}
+
+h4 {
+  color: white;
+}
+
+p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+mat-divider {
+  margin: 10px 0;
+}
+
+/* .mat-mini-fab {
+  box-shadow: none;
+} */
+
+::ng-deep .mat-button-wrapper {
+  padding: 0 !important;
+}

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.paymentsImageName }}
+  labels:
+    app: {{ .Values.paymentsImageName }}    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.paymentsImageName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.paymentsImageName }}
+    spec:
+      containers:
+        - name: {{ .Values.paymentsImageName }}
+          image: "{{ .Values.hostName }}/{{ .Values.projectID }}/{{ .Values.paymentsImageName }}:{{ .Values.paymentsImageVersion }}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DELIVERY_TIMEOUT
+              value: "3000"
+            - name: MONGO_URL
+              value: mongodb://{{ .Values.dbName }}-0.{{ .Values.dbName }},{{ .Values.dbName }}-1.{{ .Values.dbName }}/payments
+            - name: REDIS_URL
+              value: redis://{{ .Values.redisName }}
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.paymentsImageName }}
+spec:
+  selector:
+    app: {{ .Values.paymentsImageName }}
+  ports:
+    - port: 3000

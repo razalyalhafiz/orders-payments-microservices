@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.ordersImageName }}
+  labels:
+    app: {{ .Values.ordersImageName }}    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.ordersImageName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.ordersImageName }}
+    spec:
+      containers:
+        - name: {{ .Values.ordersImageName }}
+          image: "{{ .Values.hostName }}/{{ .Values.projectID }}/{{ .Values.ordersImageName }}:{{ .Values.ordersImageVersion }}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DELIVERY_TIMEOUT
+              value: "8000"
+            - name: MONGO_URL
+              value: mongodb://{{ .Values.dbName }}-0.{{ .Values.dbName }},{{ .Values.dbName }}-1.{{ .Values.dbName }}/eventstore
+            - name: REDIS_URL
+              value: redis://{{ .Values.redisName }}
+          envFrom:
+            - configMapRef:
+                name: firebase-configmap
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.ordersImageName }}
+spec:
+  selector:
+    app: {{ .Values.ordersImageName }}
+  ports:
+    - port: 3000

@@ -1,0 +1,12 @@
+.headline {
+  color: #fff;
+}
+
+.table-header {
+  display: flex;
+}
+
+.add-button {
+  bottom: 5px;
+  margin-left: 10px;
+}

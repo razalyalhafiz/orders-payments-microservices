@@ -1,0 +1,10 @@
+hostName: gcr.io
+projectID: orders-payments-microservices
+portalImageName: opm-portal
+portalImageVersion: "1.0"
+ordersImageName: opm-orders
+ordersImageVersion: "1.0"
+paymentsImageName: opm-payments
+paymentsImageVersion: "1.0"
+dbName: opm-mongodb
+redisName: opm-redis-master

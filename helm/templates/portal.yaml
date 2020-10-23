@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.portalImageName }}
+  labels:
+    app: {{ .Values.portalImageName }}    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.portalImageName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.portalImageName }}
+    spec:
+      containers:
+        - name: {{ .Values.portalImageName }}
+          image: "{{ .Values.hostName }}/{{ .Values.projectID }}/{{ .Values.portalImageName }}:{{ .Values.portalImageVersion }}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PRODUCTION
+              value: "true"
+          envFrom:
+            - configMapRef:
+                name: firebase-configmap
+          ports:
+            - containerPort: 80
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "envsubst < /usr/share/nginx/html/env_token.js > /usr/share/nginx/html/env.js"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.portalImageName }}
+spec:
+  selector:
+    app: {{ .Values.portalImageName }}
+  ports:
+    - port: 80

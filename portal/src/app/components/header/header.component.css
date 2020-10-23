@@ -1,0 +1,26 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.login-button {
+  background: #4285f4;
+  color: white;
+  border: none;
+  width: 180px;
+  height: 40px;
+  border-radius: 3%;
+  margin-right: 16px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.google-icon {
+  width: 30px;
+  background: white;
+  border-radius: 50%;
+}
+.login-text {
+  top: -10px;
+  left: 5px;
+  position: relative;
+}
