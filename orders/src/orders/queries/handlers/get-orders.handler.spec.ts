@@ -5,7 +5,7 @@ import { Order } from "src/orders/entities/order.entity"
 import { GetOrdersHandler } from "./get-orders.handler"
 import { OrderState } from "src/enums/order-state.enum"
 
-describe("GetUsersHandler", () => {
+describe("GetOrdersHandler", () => {
   it("should query redis", async () => {
     const redisk = mock(Redisk)
 

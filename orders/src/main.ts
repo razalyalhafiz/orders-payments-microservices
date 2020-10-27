@@ -9,7 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule.forRoot())
   const adminConfig: ServiceAccount = {
     projectId: config.FIREBASE.projectId,
-    privateKey: config.FIREBASE.privateKey.replace(/\\n/g, "\n"),
+    privateKey: config.FIREBASE.privateKey?.replace(/\\n/g, "\n"),
     clientEmail: config.FIREBASE.email,
   }
 
