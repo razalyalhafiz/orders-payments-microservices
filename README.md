@@ -98,5 +98,11 @@ Note: the _env.js_ file is only generated when installation is made on a _Kubern
 Once installation is done, please ensure to whitelist the IP/domain in the _Firebase_ console as shown below.
 ![Firebase domains](https://github.com/razalyalhafiz/orders-payments-microservices/blob/main/docs/firebase_domains.png)
 
+### Reconstruct view
+The materialized view can be reconstructed by opening a shell to the **orders** pod and running the script below.
+```
+# npm run reconstruct-view-db
+```
+
 ## Working Example
 A working example of the demo project can be found [here](http://35.247.176.36/).
