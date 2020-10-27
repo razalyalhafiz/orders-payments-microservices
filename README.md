@@ -40,7 +40,7 @@ All the events are persisted into a _MongoDB_ database.
 ### Order event flow
 - Events that are stored in the event store are highlighted in red
 - The dotted green lines represent pub/sub messaging via _Redis_
-![Order event flow](https://github.com/razalyalhafiz/orders-payments-microservices/main/docs/order_event_flow.jpg)
+  ![Order event flow](https://github.com/razalyalhafiz/orders-payments-microservices/blob/main/docs/order_event_flow.jpg)
 
 ## How To Run
 
