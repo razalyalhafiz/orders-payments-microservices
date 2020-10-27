@@ -50,7 +50,7 @@ All the events are persisted into a _MongoDB_ database.
 - Installation scripts available for _Minikube_ and _Google Cloud Platform_
   - Please ensure to copy the file _.firebase-configmap.example.yaml_ and set the values accordingly prior to starting installation.
   ```
-  $ cp .firebase-configmap.example.yaml firebase-configmap.yaml
+  $ cp firebase-configmap.example.yaml firebase-configmap.yaml
   ```
 
 ### Install on Minikube
