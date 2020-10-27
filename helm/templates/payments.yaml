@@ -19,7 +19,7 @@ spec:
           image: "{{ .Values.hostName }}/{{ .Values.projectID }}/{{ .Values.paymentsImageName }}:{{ .Values.paymentsImageVersion }}"
           imagePullPolicy: IfNotPresent
           env:
-            - name: DELIVERY_TIMEOUT
+            - name: PROCESS_PAYMENT_TIMEOUT
               value: "3000"
             - name: MONGO_URL
               value: mongodb://{{ .Values.dbName }}-0.{{ .Values.dbName }},{{ .Values.dbName }}-1.{{ .Values.dbName }}/payments

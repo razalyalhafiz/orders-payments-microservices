@@ -18,7 +18,7 @@ export class EventSourceService {
       };
 
       eventSource.onerror = () => {
-        observer.error('SSE error occurred. Please try again later.');
+        observer.error('SSE error occurred. Please refresh the page.');
         eventSource.close();
         observer.complete();
       };
