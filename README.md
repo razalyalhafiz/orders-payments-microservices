@@ -94,5 +94,9 @@ export class EnvService {
 ```
 Note: the _env.js_ file is only generated when installation is made on a _Kubernetes_ cluster.
 
+### Add IP/domain to _Firebase_ console
+Once installation is done, please ensure to whitelist the IP/domain in the _Firebase_ console as shown below.
+![Firebase domains](https://github.com/razalyalhafiz/orders-payments-microservices/blob/main/docs/firebase_domains.png)
+
 ## Working Example
-A working example of the demo project can be found [here](http://35.240.168.252/).
+A working example of the demo project can be found [here](http://35.247.176.36/).
